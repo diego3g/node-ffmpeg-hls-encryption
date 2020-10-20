@@ -1,0 +1,6 @@
+dist/*
+!dist/.gitkeep
+tmp/*
+!tmp/.gitkeep
+node_modules
+video.mkv

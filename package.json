@@ -1,0 +1,14 @@
+{
+  "name": "transcode-lambda",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node src/transcode.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^14.11.8",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  }
+}

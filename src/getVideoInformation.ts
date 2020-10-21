@@ -5,7 +5,7 @@ import fs from 'fs';
 const tmpPath = path.join(__dirname, "..", 'tmp');
 const probeVideoDataPath = path.join(tmpPath, 'probeVideoData.json');
 
-const ffprobePath = '/usr/bin/ffprobe';
+const ffprobePath = '/usr/local/bin/ffprobe';
 
 interface VideInformation {
   streams: Array<{

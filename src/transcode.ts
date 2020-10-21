@@ -1,8 +1,10 @@
 import path from 'path';
 import fs from 'fs';
+
 import { getVideoInformation } from './getVideoInformation';
 import { createSegmentsFromOriginalVideo } from './createSegmentsFromOriginalVideo';
 import { convertSegmentToCustomResolution, Resolutions } from './convertSegmentToCustomResolution';
+import { createMasterPlaylist } from './createMasterPlaylist';
 
 const inputPath = path.join(__dirname, '..', 'video.mkv');
 const distPath = path.join(__dirname, '..', 'dist');
@@ -55,4 +57,6 @@ const main = async () => {
   }));
 }
 
-main();
+createMasterPlaylist();
+
+// main();

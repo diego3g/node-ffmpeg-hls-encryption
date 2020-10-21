@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process'
 
-const ffmpegPath = '/usr/bin/ffmpeg';
+const ffmpegPath = '/usr/local/bin/ffmpeg';
 const distPath = path.join(__dirname, '..', 'dist');
 
 export async function createSegmentsFromOriginalVideo(objectPath: string) {

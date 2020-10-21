@@ -10,3 +10,7 @@
 
 [ ] Audio segments;
 [ ] AES-128 encryption;
+
+# VideoJS
+
+https://www.npmjs.com/package/videojs-seek-buttons

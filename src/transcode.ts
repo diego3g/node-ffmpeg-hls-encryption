@@ -5,6 +5,9 @@ import { getVideoInformation } from './getVideoInformation';
 import { createSegmentsFromOriginalVideo } from './createSegmentsFromOriginalVideo';
 import { convertSegmentToCustomResolution, Resolutions } from './convertSegmentToCustomResolution';
 import { createMasterPlaylist } from './createMasterPlaylist';
+import { mergeSegmentsIntoVideo } from './mergeSegmentsIntoVideo';
+import { generateEncryptedSegments } from './generateEncryptedSegments';
+import { generateEncryptionKey } from './generateEncryptionKey';
 
 const inputPath = path.join(__dirname, '..', 'video.mkv');
 const distPath = path.join(__dirname, '..', 'dist');
@@ -27,6 +30,8 @@ const main = async () => {
     '1280x720',
     '640x480'
   ];
+
+  await fs.promises.mkdir(path.join(distPath, 'merged'));
 
   await Promise.all(resolutions.map(async (resolution) => {
     console.time(`${resolution}p`);
@@ -53,10 +58,20 @@ const main = async () => {
       path.join(destinationPath, 'playlist.m3u8')
     );
 
+    await fs.promises.mkdir(path.join(distPath, 'encrypted', resolution), { 
+      recursive: true 
+    });
+
+    await generateEncryptionKey(resolution);
+
+    await mergeSegmentsIntoVideo(resolution);
+
+    await generateEncryptedSegments(resolution);
+
     console.timeEnd(`${resolution}p`);
   }));
+
+  await createMasterPlaylist();
 }
 
-createMasterPlaylist();
-
-// main();
+main();

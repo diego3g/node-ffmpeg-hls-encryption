@@ -4,7 +4,7 @@ import HLS from 'hls-parser';
 
 const distPath = path.join(__dirname, '..', 'dist');
 
-const { MasterPlaylist, Variant, MediaPlaylist } = HLS.types;
+const { MasterPlaylist, Variant } = HLS.types;
 
 const resolutions = [
   "640x480",
@@ -14,7 +14,7 @@ const resolutions = [
 
 export async function createMasterPlaylist() {
   const variants = resolutions.map((resolution) => {
-    const playlistPath = path.join(distPath, resolution, 'playlist.m3u8');
+    const playlistPath = path.join(distPath, 'encrypted', resolution, 'playlist.m3u8');
     const playlistContent = fs.readFileSync(playlistPath, { encoding: 'utf8' });
   
     const { segments } = HLS.parse(playlistContent) as HLS.types.MediaPlaylist;
@@ -41,7 +41,7 @@ export async function createMasterPlaylist() {
   })
 
   await fs.promises.writeFile(
-    path.join(distPath, 'master.m3u8'),
+    path.join(distPath, 'encrypted', 'master.m3u8'),
     HLS.stringify(masterPlaylist),
   );
 }
